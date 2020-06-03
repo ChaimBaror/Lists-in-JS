@@ -79,10 +79,10 @@ let templates = {
 
     Transaction:
         `<div class="account Transaction flex-col">
-    <div> <label>AccountId: </label> <span>[AccountId]</span> </div>
-    <div> <label>Type: </label> <span>[Type]</span> </div>
-    <div> <label>Amount: </label> <span>[Amount]</span> </div>
-    <div > <label>ID: </label> <span>[ID]</span> </div>
+    <div> <label>&nbsp; AccountId: </label> <span> [AccountId] </span> </div>
+    <div> <label>&nbsp; Type: </label> <span> [Type] <td> </span> </div>
+    <div> <label>&nbsp; Amount: </label> <span> [Amount] </span> </div>
+    <div > <label>&nbsp; ID: </label> <span> [ID] </span> </div>
 </div>`,
 }
 
@@ -100,7 +100,7 @@ function init() {
     all.forEach(div => {
         div.onclick = function (ev) {
 
-
+            document.querySelector('.Transaction-panel').innerHTML ="";
             document.querySelectorAll('.account').forEach(a =>
                 a.className = a.className.replace("acount", ""))
             div.className += " acount"
@@ -126,12 +126,12 @@ function initTrans() {
         acc.onclick = function (ev) {
             console.log("initTrans" + ev);
 
-            accId = document.querySelector('.idT').textContent;
+            accId = this.querySelector('.idT').textContent;
             console.log('Transaction=== ' + accId);
             myTrans = BankDb.API.getTransactionsByAccountId(accId)
             console.log(myTrans);
 
-            document.querySelector('.details-panel').innerHTML = shukiRender(templates.Transaction, myTrans)
+            document.querySelector('.Transaction-panel').innerHTML = shukiRender(templates.Transaction, myTrans)
         }
     })
 }
