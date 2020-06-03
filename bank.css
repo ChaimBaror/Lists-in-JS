@@ -1,0 +1,64 @@
+body{
+    width: 60%;
+    text-align: center;
+    margin: auto;
+    padding: 60px 0;
+}
+
+
+.flex {
+    background: red;
+    display: flex;
+}
+
+.flex-col {
+   
+    display: flex;
+    
+    flex-direction: column;
+}
+
+section{
+    overflow: auto;
+    text-align: left;
+    padding: 0 15%;
+}
+
+
+.account {
+    
+    padding: 10px;
+    border: 5px solid royalblue;
+    margin: 10px 0;
+}
+
+.acount {
+    background:  yellow
+}
+
+.accounts-list{
+height: 50%;
+overflow: auto;
+}
+
+.Client {
+   
+    text-align: center
+}
+
+.accountTransaction{
+    background: beige;
+    overflow: auto;
+    padding: 0 10%;
+}
+
+h2{
+    padding: 5px;
+    border: 1px auto black;
+    margin: 5px 0;
+}
+
+.Transaction{
+    background: rosybrown;
+
+}
