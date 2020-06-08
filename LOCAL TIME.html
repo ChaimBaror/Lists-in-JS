@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        body {
+            text-align: center
+        }
+
+        h1 {
+            font-size: 400px;
+        }
+
+        chaim {
+            background: rgb(178, 220, 226);
+        }
+        .CONTENER{
+            DISPLAY : flex;
+            /* border:2px solid tomato; */
+            margin: 5px;
+            padding: 4px;
+            justify-content: space-around;
+        }
+    </style>
+
+
+    <title>LOCAL TIME</title>
+</head>
+<div class="flex home">
+    <div class="flex-col">
+
+        <div>
+            <label>city: </label>
+            <input class="city">
+        </div><br>
+        <div>
+            <label>TZ: </label>
+            <input class="TZ">
+        </div>
+        <div class="CONTENER">
+            <div-sha c="jerusalem" t='0'></div-sha>
+            <br>
+            <div-sha c="london" t='-2'></div-sha>
+            <br>
+            <div-sha c="new york" t='-7'></div-sha>
+        </div>
+
+        <body>
+
+            <script>
+                var myVar = setInterval(setColor, 1000);
+                function setColor() {
+                    var x = document.body;
+                    x.style.backgroundColor = x.style.backgroundColor == "rgb(178, 220, 226)" ? "ivory" : "rgb(178, 220, 226)";
+                }
+
+                function stopColor() {
+                    clearInterval(myVar);
+                }
+
+
+
+                let newdiv = document.querySelector('div-sha')
+                document.querySelector('input.city').oninput = ev => {
+                    newdiv.setAttribute("c", ev.target.value)
+                }
+                document.querySelector('input.TZ').oninput = ev => {
+                    newdiv.setAttribute("t", ev.target.value)
+                }
+
+
+                class divsha extends HTMLElement {
+
+                    static get observedAttributes() { return ['c', 't']; }
+                    constructor() {
+                        super();
+
+                        const shadow = this.attachShadow({ mode: 'open' })
+
+                        let div = document.createElement("div")
+                        div.className = 'wrapper'
+
+
+                        const style = document.createElement('style');
+                        console.log(style);
+                        
+
+                        style.textContent = `
+                        .wrapper {
+                            background:blue;
+                            color :yellow;
+                        }`
+                        console.log(style);
+
+
+                        shadow.appendChild(div)
+                        let div2 = document.createElement("div")
+                        div2.innerHTML = "my new div"
+                        shadow.appendChild(div2)
+
+
+                        this.h1 = document.createElement("h1")
+                        console.log(this.h1);
+
+                        this.divitme = document.createElement("div")
+                        div.innerHTML = "<h2>LOCAL TIME</h2>"
+                        div.appendChild(this.h1)
+                        div.appendChild(this.divitme)
+                       
+                        let t = () => {
+                            let time = new Date()
+                            time.setHours(time.getHours() + this.tz);
+                            this.h1.innerHTML = time.toLocaleTimeString();
+                        }
+
+                        console.log(this.h1);
+                        setInterval(t, 1000);
+
+                  
+                    }
+
+                    
+
+                    attributeChangedCallback(name, oldValue, newValue) {
+                        console.log('Custom DynClock element attributes changed.', name, oldValue, newValue)
+                        console.log(this.shadow);
+                        this.divitme.innerHTML = `<h2>${this.getAttribute('c')}</h2>`
+
+                        if (name == 't') {
+                            this.tz = parseInt(newValue)
+                        }
+                    }
+                }
+
+                customElements.define('div-sha', divsha)
+            </script>
+
+
+        </body>
+
+        </html>
