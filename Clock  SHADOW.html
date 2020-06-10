@@ -20,30 +20,33 @@
             padding: 4px;
             justify-content: space-around;
         }
+        .flex-col{
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
 
 
     <title>LOCAL TIME</title>
 </head>
 <div class="flex home">
-    <div class="flex-col">
-
-        <div>
-            <label>city: </label>
-            <input class="city">
-        </div><br>
-        <div>
-            <label>TZ: </label>
-            <input class="TZ">
-        </div>
+  
         <div class="CONTENER">
-            <div-sha c="jerusalem" t='0'></div-sha>
+            <div-sha class="clceim1" c="jerusalem" t='0'></div-sha>
             <br>
-            <div-sha c="london" t='-2'></div-sha>
+            <div-sha class="clceim2" c="london" t='-2'></div-sha>
             <br>
-            <div-sha c="new york" t='-7'></div-sha>
+            <div-sha class="clceim3" c="new york" t='-7'></div-sha>
         </div>
+        <div class="flex-col">
 
+                <clock-in clock-selactor=".clceim1"></clock-in>
+                <br><br>  <br><br>
+                <clock-in clock-selactor=".clceim2"></clock-in>
+                <br><br>  <br><br>
+                <clock-in clock-selactor=".clceim3"></clock-in>
+        
+              </div>
         <body>
 
             <script>
@@ -52,19 +55,8 @@
                     var x = document.body;
                     x.style.backgroundColor = x.style.backgroundColor == "rgb(178, 220, 226)" ? "ivory" : "rgb(178, 220, 226)";
                 }
-
                 function stopColor() {
                     clearInterval(myVar);
-                }
-
-
-
-                let newdiv = document.querySelector('div-sha')
-                document.querySelector('input.city').oninput = ev => {
-                    newdiv.setAttribute("c", ev.target.value)
-                }
-                document.querySelector('input.TZ').oninput = ev => {
-                    newdiv.setAttribute("t", ev.target.value)
                 }
 
 
@@ -77,24 +69,10 @@
                         const shadow = this.attachShadow({ mode: 'open' })
 
                         let div = document.createElement("div")
-                        div.className = 'wrapper'
-
-
-                        const style = document.createElement('style');
-                        console.log(style);
-                        
-
-                        style.textContent = `
-                        .wrapper {
-                            background:blue;
-                            color :yellow;
-                        }`
-                        console.log(style);
-
 
                         shadow.appendChild(div)
                         let div2 = document.createElement("div")
-                        div2.innerHTML = "my new div"
+                     
                         shadow.appendChild(div2)
 
 
@@ -115,10 +93,7 @@
                         console.log(this.h1);
                         setInterval(t, 1000);
 
-                  
                     }
-
-                    
 
                     attributeChangedCallback(name, oldValue, newValue) {
                         console.log('Custom DynClock element attributes changed.', name, oldValue, newValue)
@@ -133,6 +108,71 @@
 
                 customElements.define('div-sha', divsha)
             </script>
+
+        <script>
+    
+        class denmanger extends HTMLElement {
+
+            // static get observedAttributes() { return ['c', 't']; }
+            constructor() {
+                super();
+
+                const shadow = this.attachShadow({ mode: 'open' })
+
+                this.div = document.createElement("div")
+                
+                shadow.appendChild(this.div)
+             
+                this.div2 = document.createElement("div")
+                shadow.appendChild(this.div2)
+
+
+                this.label = document.createElement("label")
+                this.label.innerHTML='<h2>city</h2>'
+             
+                this.input = document.createElement("input")
+                this.input.className="mysty"
+                this.div.appendChild(this.label)
+                this.div.appendChild(this.input)
+                
+
+                
+                this.label2 = document.createElement("label")
+                this.label2.innerHTML='<h2>tz</h2>'
+             
+                this.input2 = document.createElement("input")
+                this.div2.appendChild(this.label2)
+                this.div2.appendChild(this.input2)
+               
+            let myslactor=this.getAttribute('clock-selactor') 
+            console.log(myslactor);
+            this.myclock=document.querySelector(myslactor)
+            console.log(this.myclock);
+
+               this.input.oninput = ev => {
+                    this.myclock.setAttribute("c", ev.target.value)
+                }
+                this.input2.oninput = ev => {
+                    this.myclock.setAttribute("t", ev.target.value)
+                }
+            
+
+                const style = document.createElement('style');
+                        console.log(style);
+                        
+                        style.textContent = `
+                        .mysty {
+                            background:blue;
+                            color :yellow;
+                        }`
+                        console.log(style);
+                        shadow.appendChild(style)
+
+            }
+        }
+
+        customElements.define('clock-in', denmanger)
+    </script>
 
 
         </body>
