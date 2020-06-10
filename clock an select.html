@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Time zones</title>
+</head>
+
+<body>
+    <style>
+        body {
+            text-align: center
+        }
+
+        label {
+            font-size: 1rem;
+            padding-right: 10px;
+        }
+
+        select {
+            font-size: .9rem;
+            padding: 2px 5px;
+            text-align: center
+        }
+
+        option {
+            color: rgb(238, 40, 40);
+        }
+        .main{
+            overflow: auto;
+            height: 100px;
+            color:royalblue;
+           
+        }
+       
+    </style>
+    
+
+    <selecor-clock class="mainger" menger='.colok'></selecor-clock>
+    <den-clock class='colok' c ='london' t ='4'></den-clock>
+<br><br>
+    <div class="main"></div>
+    <script>
+
+        function ren(temp, arrdict) {
+            let h = ''
+            arrdict.forEach(dict => {
+                let itemHtml = temp
+                for (let i in dict) {
+                    itemHtml = itemHtml.replace(`[${i}]`, dict[i])
+                }
+                h += itemHtml
+            });
+            return h
+        }
+
+        let cities = [
+            { city: "jerusalem", tz: '0' },
+            { city: "istanbul", tz: '0' },
+            { city: "london", tz: '-2' },
+            { city: "NEW YORK", tz: '-7' },
+            { city: "beijing", tz: '5' },
+            { city: "baghdad", tz: '0' },
+            { city: "milano", tz: '-1' },
+            { city: "ISREAL", tz: '0' },
+            { city: "Argentina", tz: '-6' },
+            { city: "jordan", tz: '0' },
+            { city: "germany", tz: '-1' },
+            { city: "amsterdam", tz: '-1' }
+        ]
+        let data = [
+            { name: "chaim", age: "23", claes: "avratech1", type: "student" },
+            { name: "david", age: "13", claes: "avratech2", type: "student" },
+            { name: "yoel", age: "54", claes: "avratech3", type: "student" },
+            { name: "moshe", age: "6", claes: "avratec5h", type: "student" },
+        ]
+
+        let templet = {
+            sele:
+                `<ul>
+                  <li>[name] : [age] : [claes] : [type]</li>
+          </ul>`,
+            citiesTample:
+                ` 
+                <option value=[tz]>
+                    [city]</option>`
+        }
+
+        document.querySelector('.main').innerHTML=ren(templet.sele,data)
+
+        class selecorclock extends HTMLElement {
+            constructor() {
+                super();
+
+                let c = this.getAttribute('menger')
+                this.clock = document.querySelector(c)
+                
+                let templatecity = ren(templet.citiesTample, cities);
+                console.log("this is this============="+this.clock);
+                console.log(templatecity);
+
+                let shadow = this.attachShadow({ mode: 'open' })
+
+                this.select = document.createElement('select');
+                this.select.className='myshadow'
+                this.select.innerHTML =`<option value="">--Please choose TIME CITY--</option>`+ templatecity
+
+                shadow.appendChild(this.select)
+                console.log('this.select.value' + this.select.value);
+
+                let style = document.createElement('style')
+                style.textContent = `
+                .myshadow{
+                    color :yellow;
+                    background:blue;
+                    font-size: 2rem;
+                    
+                }`
+                shadow.appendChild(style)
+
+              
+                console.log(style);
+                
+
+                this.select.onchange = ev => {
+                    console.log("onchange");
+                    console.log("selectedIndex", this.select.selectedIndex);
+                    console.log("s.selectedOptions[0].innerHTML",
+                        this.select.selectedOptions[0].innerHTML,
+                        this.select.selectedOptions);
+                    console.log("stu id", this.select.selectedOptions[0].getAttribute('student-id'));
+                    console.log("value", this.select.value);
+                    this.clock.setAttribute('c',this.select.selectedOptions[0].innerHTML)
+                    this.clock.setAttribute('t', this.select.value);
+                }
+            }
+        }
+        customElements.define('selecor-clock', selecorclock);
+
+
+
+        class divsha extends HTMLElement {
+
+            static get observedAttributes() { return ['c', 't']; }
+            constructor() {
+                super();
+
+                const shadow = this.attachShadow({ mode: 'open' })
+
+                let div = document.createElement("div")
+
+                shadow.appendChild(div)
+                let div2 = document.createElement("div")
+
+                shadow.appendChild(div2)
+
+
+                this.h1 = document.createElement("h1")
+                console.log(this.h1);
+
+                this.divitme = document.createElement("div")
+                div.innerHTML = "<h2>LOCAL TIME</h2>"
+                div.appendChild(this.h1)
+                div.appendChild(this.divitme)
+
+                let t = () => {
+                    let time = new Date()
+                    time.setHours(time.getHours() + this.tz);
+                    this.h1.innerHTML = time.toLocaleTimeString();
+                }
+
+                console.log(this.h1);
+                setInterval(t, 1000);
+
+            }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log('Custom DynClock element attributes changed.', name, oldValue, newValue)
+                console.log(this.shadow);
+                this.divitme.innerHTML = `<h2>${this.getAttribute('c')}</h2>`
+
+                if (name == 't') {
+                    this.tz = parseInt(newValue)
+                }
+            }
+        }
+
+        customElements.define('den-clock', divsha)
+    </script>
+
+</body>
+
+</html>
