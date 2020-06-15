@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<head>
+    <title>test-init-2</title>
+</head>
+<style>
+    .contenr {
+        text-align: center;
+    display: flex;
+        justify-content: space-between;
+        overflow: scroll;
+    }
+
+</style>
+
+<div class="contenr">
+<den-com n="1"></den-com>
+<den-com n="2"></den-com>
+<den-com n="3"></den-com>
+<den-com n="4"></den-com>
+<den-com n="5"></den-com>
+<den-com n="6"></den-com>
+<den-com n="7"></den-com>
+<den-com n="8"></den-com>
+<den-com n="9"></den-com>
+<den-com n="10"></den-com>
+<den-com n="11"></den-com>
+<den-com n="12"></den-com>
+</div>
+<body>
+    <script>
+        false
+        let listStu = [
+            { name: 'name A', age: 10, type: true, class: 'class1', Id: 1 },
+            { name: 'name B', age: 12, type: false, class: 'class2', Id: 2 },
+            { name: 'name C', age: 13, type: true, class: 'class3', Id: 3 },
+            { name: 'name D', age: 14, type: false, class: 'class4', Id: 4 },
+            { name: 'name E', age: 31, type: true, class: 'class1', Id: 5 },
+            { name: 'name F', age: 22, type: false, class: 'class2', Id: 6 },
+            { name: 'name G', age: 43, type: true, class: 'class3', Id: 7 },
+            { name: 'name H', age: 14, type: false, class: 'class4', Id: 8 },
+            { name: 'name I', age: 31, type: true, class: 'class1', Id: 9 },
+            { name: 'name L', age: 24, type: false, class: 'class2', Id: 10 },
+            { name: 'name N', age: 43, type: true, class: 'class3', Id: 11 },
+            { name: 'name O', age: 45, type: false, class: 'class4', Id: 12 },
+        ]
+        let data = [
+            { Id: 1, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 2, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 3, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 4, img: 'http://img1.jpg', IsGood: false, color: 'red' },
+            { Id: 5, img: 'http://img1.jpg', IsGood: true, color: 'blue' },
+            { Id: 6, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 7, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 8, img: 'http://img1.jpg', IsGood: false, color: 'red' },
+            { Id: 9, img: 'http://img1.jpg', IsGood: true, color: 'blue' },
+            { Id: 10, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 11, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 12, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+        ]
+
+
+        function miniRen(temp, arrdict) {
+            let h = ''
+            arrdict.forEach(dict => {
+                let itemHtml = temp
+                for (let i in dict) {
+                    itemHtml = itemHtml.replace(`[${i}]`, dict[i])
+                }
+                h += itemHtml
+            });
+            return h
+        }
+
+
+        class dencom extends HTMLElement {
+            constructor() {
+                super();
+
+                const shadow = this.attachShadow({ mode: 'open' })
+
+                this.div1 = document.createElement('div')
+                this.div1.className ='stuStyle'
+
+                let id = this.getAttribute('n')
+                id=(id-1)
+                console.log(id);
+                
+
+                this.div1.innerHTML +=`<h2>ID: ${listStu[id].Id}</h2>`
+                this.div1.innerHTML +=`<img src=${data[id].img}>`
+                this.div1.innerHTML +=`<h6>name : ${listStu[id].name}</h6>`
+               if (data[id].IsGood)
+                this.div1.innerHTML +=`<b>Good :  ${data[id].IsGood}</b>`
+               else{
+                this.div1.innerHTML +=`<p>Not Good :  ${data[id].IsGood}</p>` 
+               }
+
+                let style = document.createElement('style')
+                style.textContent = `
+                .stuStyle{
+                    color :${data[id].color};
+                    font-size:1rem;
+                    margin:2.5%;
+                    background: aliceblue;
+                    border:1px solid blueviolet;
+                    
+                }`
+                shadow.appendChild(style)
+                shadow.appendChild(this.div1)
+           
+            }
+        }
+        customElements.define('den-com', dencom)
+
+    </script>
+</body>
+
+</html>

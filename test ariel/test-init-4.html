@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<head>
+    <title>test-init-4</title>
+</head>
+<style>
+    body {
+        text-align: center;
+      
+    }
+
+
+
+</style>
+
+<den-manger manger=".main" ></den-manger>
+<den-com class="main" n="1"></den-com>
+<den-manger manger=".manger"></den-manger>
+<den-com class="manger" n="5"></den-com>
+
+
+
+</div>
+<body>
+    <script>
+        false
+        let list4 = [
+            { name: 'name A', age: 10, type: true, class: 'class1', Id: 11 },
+            { name: 'name B', age: 12, type: false, class: 'class1', Id:12 },
+            { name: 'name C', age: 13, type: true, class: 'class1', Id: 13 },
+            { name: 'name D', age: 14, type: false, class: 'class1', Id: 14 },
+            { name: 'name E', age: 31, type: true, class: 'class1', Id: 15 },
+            { name: 'name F', age: 22, type: false, class: 'class1', Id: 16 },
+            { name: 'name G', age: 43, type: true, class: 'class1', Id: 17 },
+            { name: 'name H', age: 14, type: false, class: 'class1', Id:18 },
+            { name: 'name I', age: 31, type: true, class: 'class1', Id: 19 },
+            { name: 'name L', age: 24, type: false, class: 'class1', Id: 110 },
+            { name: 'name N', age: 43, type: true, class: 'class1', Id: 111 },
+            { name: 'name O', age: 45, type: false, class: 'class1', Id: 112 },
+    ]
+        let list3 = [
+            { name: 'name A', age: 10, type: true, class: 'class5', Id: 21 },
+            { name: 'name B', age: 12, type: false, class: 'class5', Id: 22 },
+            { name: 'name C', age: 13, type: true, class: 'class5', Id: 33 },
+            { name: 'name D', age: 14, type: false, class: 'class5', Id: 34 },
+            { name: 'name E', age: 31, type: true, class: 'class5', Id: 35 },
+            { name: 'name F', age: 22, type: false, class: 'class5', Id: 36 },
+            { name: 'name G', age: 43, type: true, class: 'class5', Id: 37 },
+            { name: 'name H', age: 14, type: false, class: 'class5', Id: 38 },
+            { name: 'name I', age: 31, type: true, class: 'class5', Id: 39 },
+            { name: 'name L', age: 24, type: false, class: 'class5', Id: 310 },
+            { name: 'name N', age: 43, type: true, class: 'class5', Id: 311 },
+            { name: 'name O', age: 45, type: false, class: 'class5', Id: 312 },
+    ]
+        let listStu = [
+            { name: 'name A', age: 10, type: true, class: 'class1', Id: 1 },
+            { name: 'name B', age: 12, type: false, class: 'class2', Id: 2 },
+            { name: 'name C', age: 13, type: true, class: 'class3', Id: 3 },
+            { name: 'name D', age: 14, type: false, class: 'class4', Id: 4 },
+            { name: 'name E', age: 31, type: true, class: 'class1', Id: 5 },
+            { name: 'name F', age: 22, type: false, class: 'class2', Id: 6 },
+            { name: 'name G', age: 43, type: true, class: 'class3', Id: 7 },
+            { name: 'name H', age: 14, type: false, class: 'class4', Id: 8 },
+            { name: 'name I', age: 31, type: true, class: 'class1', Id: 9 },
+            { name: 'name L', age: 24, type: false, class: 'class2', Id: 10 },
+            { name: 'name N', age: 43, type: true, class: 'class3', Id: 11 },
+            { name: 'name O', age: 45, type: false, class: 'class4', Id: 12 },
+        ]
+        let data = [
+            { Id: 1, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 2, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 3, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 4, img: 'http://img1.jpg', IsGood: false, color: 'red' },
+            { Id: 5, img: 'http://img1.jpg', IsGood: true, color: 'blue' },
+            { Id: 6, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 7, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 8, img: 'http://img1.jpg', IsGood: false, color: 'red' },
+            { Id: 9, img: 'http://img1.jpg', IsGood: true, color: 'blue' },
+            { Id: 10, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 11, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 12, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+        ]
+
+
+        let template = {
+            list: `<ul><h1>Student</h1>
+        <li>[name]</li>
+        <li>[age]</li>
+        <li>[type]</li>
+        <li>[class]</li>
+        </ul>`,
+
+            list2: `<h1>
+        <span>[class]</span>
+        <span>[age]</span>
+        <span>[name]</span>
+        <span>[type]</span>
+        </h1>`,
+
+        list3: 
+                `<option value=[id]>
+                    [class]</option>`,
+
+         card:
+        `<div class="stuStyle">
+        <h2>ID:[Id]</h2>
+        <img src=[img]>
+        <h1>name :[name]</h1><br>
+        <b>Good : [age]</b></div>`,
+
+        card2:
+        `<div class="stuStyle2">
+       <lebal>name :</lebal> <h2>[name]</h2>
+       <lebal>class : </lebal><h3> [class]</h3>
+       <lebal> age :</lebal><b> [age]</b>
+       <lebal>ID:</lebal> <h2>[Id]</h2></div>`,
+       sele:
+                `<ul>
+                  <li>[name] : [age] : [claes] : [type]</li>
+          </ul>`,
+}      
+                
+
+        function miniRen(temp, arrdict) {
+            let h = ''
+            arrdict.forEach(dict => {
+                let itemHtml = temp
+                for (let i in dict) {
+                    itemHtml = itemHtml.replace(`[${i}]`, dict[i])
+                }
+                h += itemHtml
+            });
+            return h
+        }
+
+
+        class dencom extends HTMLElement {
+            static get observedAttributes() { return ['n' ]; }
+
+            constructor() {
+                super();
+                const shadow = this.attachShadow({ mode: 'open' })
+
+                this.div1 = document.createElement('div')
+                this.div1.className ='stuStyle'
+
+                this.id = this.getAttribute('n')
+
+                this.id=( this.id-1)
+                console.log('this is iddddd+++'+ this.id);
+                
+                // function up() {
+                    
+            //         this.div1.innerHTML +=`<h2>ID: ${listStu[this.id].Id}</h2>`
+            //     this.div1.innerHTML +=`<img src=${data[ this.id].img}>`
+            //     this.div1.innerHTML +=`<h6>name : ${listStu[ this.id].name}</h6>`
+            //    if (data[ this.id].IsGood)
+            //     this.div1.innerHTML +=`<b>Good :  ${data[ this.id].IsGood}</b>`
+            //    else{
+            //     this.div1.innerHTML +=`<p>Not Good :  ${data[ this.id].IsGood}</p>` 
+            //    }
+            // }
+        //    setInterval(up, 10000);
+                let style = document.createElement('style')
+                style.textContent = `
+                .stuStyle{
+                    color :${data[this.id].color};
+                    font-size:1rem;
+                    margin:2.5%;
+                    width: 30%;
+                    height: 250px;
+                    background: aliceblue;
+                    border:1px solid blueviolet;
+                }`
+                shadow.appendChild(style)
+                shadow.appendChild(this.div1)
+            }
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log('Custom DynClock element attributes changed.', name, oldValue, newValue)
+                this.div1.innerHTML =""
+
+
+                this.id = this.getAttribute('n')
+
+                // id=(id-1)
+                // // console.log(id);
+                // let dataForStudent= []
+                // listStu.forEach(dict => {
+                //     let imagFor = data[dict.Id]
+                //     console.log(data[dict.Id]);
+                //     let o = {
+                //         Id: dict.Id,
+                //         name: dict.name,
+                //         age: dict.age,
+                //         img: imagFor,
+                        
+                //     };
+                //     dataForStudent.push(o) 
+                //     console.log(dataForStudent.img);
+                // })
+                // this.div1.innerHTML = miniRen(template.card,dataForStudent)
+
+
+
+////////////////////
+
+                this.div1.innerHTML +=`<h2>ID: ${listStu[this.id].Id}</h2>`
+                this.div1.innerHTML +=`<img src=${data[ this.id].img}>`
+                
+               if (data[ this.id].IsGood){
+                this.div1.innerHTML +=`<b>Good :  ${data[ this.id].IsGood}</b>`
+                this.div1.innerHTML +=`<h1>name : ${listStu[ this.id].name}</h1>`
+               }
+
+
+               else{
+                this.div1.innerHTML +=`<p>Not Good :  ${data[ this.id].IsGood}</p>` 
+                this.div1.innerHTML +=`<h6>name : ${listStu[ this.id].name}</h6>`
+}
+
+               
+            }
+        }
+        customElements.define('den-com', dencom)
+
+    </script>
+<script>
+
+class manger extends HTMLElement {
+    constructor() {
+        super();
+
+        let c = this.getAttribute('manger')
+        this.initclass = document.querySelector(c)
+        
+        let mylist = miniRen(template.list3,listStu)
+      
+        let shadow = this.attachShadow({ mode: 'open' })
+
+        this.select = document.createElement('select');
+        this.select.className='myshadow'
+        this.select.innerHTML =`<option value="">--Please choose Sutdent Name--</option>`+ mylist
+
+        shadow.appendChild(this.select)
+        console.log('this.select.value' + this.select.value);
+
+        let style = document.createElement('style')
+        style.textContent = `
+        .myshadow{
+            color :yellow;
+            background:blue;
+            font-size: 2rem;
+        }`
+        shadow.appendChild(style)
+
+      
+        console.log(style);
+        
+        this.select.onchange = ev => {
+            console.log("onchange");
+            console.log("selectedIndex", this.select.selectedIndex);
+            console.log("s.selectedOptions[0].innerHTML",
+                this.select.selectedOptions[0].innerHTML,
+                this.select.selectedOptions);
+            console.log("stu id", this.select.selectedOptions[0].getAttribute('student-id'));
+            console.log("value", this.select.value);
+          
+             this.initclass.setAttribute('n',this.select.selectedIndex);
+             console.log("this is this ============"+this.select.selectedIndex);
+             
+        }
+    }
+}
+customElements.define('den-manger', manger);
+</script>
+</body>
+
+</html>

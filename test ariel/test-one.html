@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<head>
+    <title>test-init-1</title>
+</head>
+<style>
+    body {
+        text-align: center
+    }
+    .myTest{
+   display:flex;
+   justify-content: space-between;
+   overflow: scroll;
+    }
+    .myTest2{
+        overflow: initial;
+        color: red;
+    }
+</style>
+<div class="myTest">list one</div>
+<br><br>
+<div class="myTest2">list 2 </div>
+
+
+<body>
+    <script>
+        false
+        let listStu = [
+            { name: 'name A', age: 1, type: true, class: 'class1' },
+            { name: 'name B', age: 2, type: false, class: 'class2' },
+            { name: 'name C', age: 3, type: true, class: 'class3' },
+            { name: 'name D', age: 4, type: false, class: 'class4' },
+            { name: 'name E', age: 1, type: true, class: 'class1' },
+            { name: 'name F', age: 2, type: false, class: 'class2' },
+            { name: 'name G', age: 3, type: true, class: 'class3' },
+            { name: 'name H', age: 4, type: false, class: 'class4' },
+            { name: 'name I', age: 1, type: true, class: 'class1' },
+            { name: 'name L', age: 2, type: false, class: 'class2' },
+            { name: 'name N', age: 3, type: true, class: 'class3' },
+            { name: 'name O', age: 4, type: false, class: 'class4' },
+        ]
+
+        let template = {
+            list: `<ul><h1>Student</h1>
+        <li>[name]</li>
+        <li>[age]</li>
+        <li>[type]</li>
+        <li>[class]</li>
+        </ul>`,
+        
+        list2:`<h1>
+        <span>[class]</span>
+        <span>[age]</span>
+        <span>[name]</span>
+        <span>[type]</span>
+        </h1>`
+    }
+        function miniRen(temp, arrdict) {
+            let h = ''
+            arrdict.forEach(dict => {
+                let itemHtml = temp
+                for (let i in dict) {
+                    itemHtml = itemHtml.replace(`[${i}]`, dict[i])
+                }
+                h += itemHtml
+            });
+            return h
+        }
+        document.querySelector('.myTest').innerHTML = miniRen(template.list, listStu)
+        document.querySelector('.myTest2').innerHTML += miniRen(template.list2, listStu)
+
+    </script>
+</body>
+
+</html>

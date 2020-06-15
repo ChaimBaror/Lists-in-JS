@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<head>
+    <title>test-init-3</title>
+</head>
+<style>
+    .contenr {
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        overflow: scroll;
+
+       
+    }
+
+</style>
+
+<div class="contenr">
+<den-com n="1"></den-com>
+
+</div>
+<body>
+    <script>
+        false
+        let listStu = [
+            { name: 'name A', age: 10, type: true, class: 'class1', Id: 1 },
+            { name: 'name B', age: 12, type: false, class: 'class2', Id: 2 },
+            { name: 'name C', age: 13, type: true, class: 'class3', Id: 3 },
+            { name: 'name D', age: 14, type: false, class: 'class4', Id: 4 },
+            { name: 'name E', age: 31, type: true, class: 'class1', Id: 5 },
+            { name: 'name F', age: 22, type: false, class: 'class2', Id: 6 },
+            { name: 'name G', age: 43, type: true, class: 'class3', Id: 7 },
+            { name: 'name H', age: 14, type: false, class: 'class4', Id: 8 },
+            { name: 'name I', age: 31, type: true, class: 'class1', Id: 9 },
+            { name: 'name L', age: 24, type: false, class: 'class2', Id: 10 },
+            { name: 'name N', age: 43, type: true, class: 'class3', Id: 11 },
+            { name: 'name O', age: 45, type: false, class: 'class4', Id: 12 },
+        ]
+        let data = [
+            { Id: 1, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 2, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 3, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 4, img: 'http://img1.jpg', IsGood: false, color: 'red' },
+            { Id: 5, img: 'http://img1.jpg', IsGood: true, color: 'blue' },
+            { Id: 6, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 7, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 8, img: 'http://img1.jpg', IsGood: false, color: 'red' },
+            { Id: 9, img: 'http://img1.jpg', IsGood: true, color: 'blue' },
+            { Id: 10, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+            { Id: 11, img: 'http://img1.jpg', IsGood: true, color: 'yellow' },
+            { Id: 12, img: 'http://img1.jpg', IsGood: true, color: 'red' },
+        ]
+
+
+let temp= {card:
+        `<div class="stuStyle">
+        <h2>ID:[Id]</h2>
+        <img src=[img]>
+        <h1>name :[name]</h1><br>
+        <b>Good : [age]</b></div>`,
+        card2:
+        `<div class="stuStyle2">
+       <lebal>name :</lebal> <h2>[name]</h2>
+       <lebal>class : </lebal><h3> [class]</h3>
+       <lebal> age :</lebal><b> [age]</b>
+       <lebal>ID:</lebal> <h2>[Id]</h2></div>`,
+       sele:
+                `<ul>
+                  <li>[name] : [age] : [claes] : [type]</li>
+          </ul>`,
+}            
+          
+
+        function miniRen(temp, arrdict) {
+            let h = ''
+            arrdict.forEach(dict => {
+                let itemHtml = temp
+                for (let i in dict) {
+                    itemHtml = itemHtml.replace(`[${i}]`, dict[i])
+                }
+                h += itemHtml
+            });
+            return h
+        }
+
+
+        class dencom extends HTMLElement {
+            constructor() {
+                super();
+
+                const shadow = this.attachShadow({ mode: 'open' })
+                this.div = document.createElement('div')
+                this.div1 = document.createElement('div')
+                this.div2 = document.createElement('div')
+                this.div1.className ='mtuStyle'
+                this.div2.className ='mtuStyle'
+            
+
+                let id = this.getAttribute('n')
+                id=(id-1)
+                console.log(id);
+                let dataForStudent= []
+                listStu.forEach(dict => {
+                    let imagFor = data[dict.Id]
+                    console.log(data[dict.Id]);
+                    let o = {
+                        Id: dict.Id,
+                        name: dict.name,
+                        age: dict.age,
+                        img: imagFor,
+                        
+                    };
+                    dataForStudent.push(o) 
+                    console.log(dataForStudent.img);
+                })
+                this.div1.innerHTML = miniRen(temp.card,dataForStudent)
+                this.div2.innerHTML = miniRen(temp.card2,dataForStudent)
+
+                let style = document.createElement('style')
+                style.textContent = `
+                .stuStyle{
+                    color :${data[0].color};
+                    font-size:1rem;
+                    margin:2.5%;
+                    width: 450px;
+                    height: 250px;
+                    
+                    background: aliceblue;
+                    border:1px solid blueviolet; 
+                }
+                .stuStyle2{
+                    color :${data[1].color};
+                    
+                    margin:2.5%;
+                    width: 450px;
+                    height: 250px;
+                    background: red;
+                    border:1px solid blueviolet; 
+                }
+               
+                .mtuStyle{
+                  display: flex;  
+                }`
+
+                this.div.appendChild(this.div2)
+                this.div.appendChild(this.div1)
+                shadow.appendChild(style)
+                shadow.appendChild(this.div)
+                
+               
+           
+            }
+        }
+        customElements.define('den-com', dencom)
+
+    </script>
+</body>
+
+</html>
